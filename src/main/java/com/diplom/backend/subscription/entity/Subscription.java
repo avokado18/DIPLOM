@@ -1,6 +1,6 @@
-package com.diplom.backend.subscription.model;
+package com.diplom.backend.subscription.entity;
 
-import com.diplom.backend.security.entity.User;
+import com.diplom.backend.user.entity.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;

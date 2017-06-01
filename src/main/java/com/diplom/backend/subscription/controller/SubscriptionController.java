@@ -1,7 +1,6 @@
 package com.diplom.backend.subscription.controller;
 
-import com.diplom.backend.subscription.model.Subscription;
-import com.diplom.backend.subscription.repository.SubscriptionRepository;
+import com.diplom.backend.subscription.entity.Subscription;
 import com.diplom.backend.subscription.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

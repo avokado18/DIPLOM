@@ -1,8 +1,7 @@
-package com.diplom.backend.security.repository;
+package com.diplom.backend.user.repository;
 
-import com.diplom.backend.security.entity.User;
+import com.diplom.backend.user.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

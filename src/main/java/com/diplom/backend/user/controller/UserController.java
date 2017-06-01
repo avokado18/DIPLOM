@@ -1,7 +1,7 @@
-package com.diplom.backend.security.controller;
+package com.diplom.backend.user.controller;
 
-import com.diplom.backend.security.entity.User;
-import com.diplom.backend.security.service.UserService;
+import com.diplom.backend.user.entity.User;
+import com.diplom.backend.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

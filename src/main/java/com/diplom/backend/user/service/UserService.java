@@ -1,7 +1,7 @@
-package com.diplom.backend.security.service;
+package com.diplom.backend.user.service;
 
-import com.diplom.backend.security.entity.User;
-import com.diplom.backend.security.repository.UserRepository;
+import com.diplom.backend.user.entity.User;
+import com.diplom.backend.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

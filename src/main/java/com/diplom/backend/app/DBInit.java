@@ -1,17 +1,16 @@
 package com.diplom.backend.app;
 
-import com.diplom.backend.security.entity.User;
-import com.diplom.backend.security.service.UserService;
-import com.diplom.backend.subscription.model.Subscription;
+import com.diplom.backend.user.entity.User;
+import com.diplom.backend.user.service.UserService;
+import com.diplom.backend.subscription.entity.Subscription;
 import com.diplom.backend.subscription.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 
-@Component
+//@Component
 public class DBInit {
     @Autowired
     private UserService userService;
@@ -19,8 +18,8 @@ public class DBInit {
     @Autowired
     private SubscriptionService subscriptionService;
 
-    @PostConstruct
-    @Transactional
+//    @PostConstruct
+//    @Transactional
     public void init(){
         User user = new User();
         user.setUsername("user");
