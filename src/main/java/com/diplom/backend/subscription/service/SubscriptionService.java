@@ -16,9 +16,8 @@ public class SubscriptionService {
     private SubscriptionRepository subscriptionRepository;
 
     @Transactional
-    public List<Subscription> findByUser(User user){
-        long userId = user.getId();
-        return subscriptionRepository.findByUserId(userId);
+    public List<Subscription> findAll(){
+        return subscriptionRepository.findAll();
     }
 
     @Transactional
@@ -27,7 +26,17 @@ public class SubscriptionService {
     }
 
     @Transactional
-    public void delere(Long id){
+    public List<Subscription> findByUser(User user){
+        return subscriptionRepository.findByUser(user);
+    }
+
+//    @Transactional
+//    public List<Subscription> findByUserId(Long id){
+//        return subscriptionRepository.findByUserId(id);
+//    }
+
+    @Transactional
+    public void delete(Long id){
         subscriptionRepository.delete(id);
     }
 
@@ -36,7 +45,7 @@ public class SubscriptionService {
         Subscription newSubscription = new Subscription();
         newSubscription.setTag(subscription.getTag());
         newSubscription.setEmail(subscription.getEmail());
-        newSubscription.setUserId(user.getId());
+        newSubscription.setUser(user);
         return subscriptionRepository.save(newSubscription);
     }
 
@@ -45,7 +54,7 @@ public class SubscriptionService {
         Subscription newSubscription = subscriptionRepository.findOne(id);
         newSubscription.setEmail(subscription.getEmail());
         newSubscription.setTag(subscription.getTag());
-        newSubscription.setUserId(subscription.getUserId());
+        newSubscription.setUser(subscription.getUser());
         return subscriptionRepository.save(subscription);
     }
 }

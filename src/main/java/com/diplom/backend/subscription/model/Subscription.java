@@ -1,6 +1,8 @@
 package com.diplom.backend.subscription.model;
 
+import com.diplom.backend.security.entity.User;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "subscription")
@@ -9,7 +11,8 @@ public class Subscription {
     @Id
     private long id;
 
-    private long userId;
+    @DBRef
+    private User user;
 
     private String tag;
 
@@ -18,8 +21,13 @@ public class Subscription {
     public Subscription() {
     }
 
-    public Subscription(long userId, String tag, String email) {
-        this.userId = userId;
+    public Subscription(User user, String tag, String email) {
+        this.user = user;
+        this.tag = tag;
+        this.email = email;
+    }
+
+    public Subscription(String tag, String email) {
         this.tag = tag;
         this.email = email;
     }
@@ -32,12 +40,12 @@ public class Subscription {
         this.id = id;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTag() {

@@ -1,8 +1,12 @@
 package com.diplom.backend.security.entity;
 
+import com.diplom.backend.subscription.model.Subscription;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "user")
 public class User {
@@ -16,6 +20,9 @@ public class User {
     private String password;
 
     private Byte enabled;
+
+//    @DBRef
+//    private List<Subscription> subscriptions;
 
     public User(User user) {
         this.username = user.username;
@@ -68,4 +75,12 @@ public class User {
     public void setEnabled(Byte enabled) {
         this.enabled = enabled;
     }
+
+//    public List<Subscription> getSubscriptions() {
+//        return subscriptions;
+//    }
+//
+//    public void setSubscriptions(List<Subscription> subscriptions) {
+//        this.subscriptions = subscriptions;
+//    }
 }
