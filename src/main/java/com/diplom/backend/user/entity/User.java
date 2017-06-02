@@ -1,8 +1,12 @@
 package com.diplom.backend.user.entity;
 
+import com.diplom.backend.subscription.entity.Subscription;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "user")
 public class User {
@@ -17,8 +21,8 @@ public class User {
 
     private Byte enabled;
 
-//    @DBRef
-//    private List<Subscription> subscriptions;
+    @DBRef
+    private List<Subscription> subscriptions;
 
     public User(User user) {
         this.username = user.username;
@@ -72,11 +76,11 @@ public class User {
         this.enabled = enabled;
     }
 
-//    public List<Subscription> getSubscriptions() {
-//        return subscriptions;
-//    }
-//
-//    public void setSubscriptions(List<Subscription> subscriptions) {
-//        this.subscriptions = subscriptions;
-//    }
+    public List<Subscription> getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(List<Subscription> subscriptions) {
+        this.subscriptions = subscriptions;
+    }
 }
