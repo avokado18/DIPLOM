@@ -6,6 +6,7 @@ import com.diplom.backend.subscription.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -22,31 +23,39 @@ public class SubscriptionService {
         return subscriptionRepository.findByTag(tag);
     }
 
+    public Subscription findById(BigInteger id){
+        return subscriptionRepository.findById(id);
+    }
+
     public List<Subscription> findByUser(User user){
         return subscriptionRepository.findByUser(user);
     }
 
-//    public List<Subscription> findByUserId(Long id){
-//        return subscriptionRepository.findByUserId(id);
-//    }
+    public List<Subscription> findByUserId(BigInteger id){
+        return subscriptionRepository.findByUserId(id);
+    }
 
-    public void delete(Long id){
+    public void delete(BigInteger id){
         subscriptionRepository.delete(id);
+    }
+
+    public void delete(Subscription subscription){
+        subscriptionRepository.delete(subscription);
     }
 
     public Subscription add(User user, Subscription subscription){
         Subscription newSubscription = new Subscription();
         newSubscription.setTag(subscription.getTag());
         newSubscription.setEmail(subscription.getEmail());
-//        newSubscription.setUser(user);
+        newSubscription.setUser(user);
         return subscriptionRepository.save(newSubscription);
     }
 
-    public Subscription update(Long id, Subscription subscription){
+    public Subscription update(BigInteger id, Subscription subscription){
         Subscription newSubscription = subscriptionRepository.findOne(id);
         newSubscription.setEmail(subscription.getEmail());
         newSubscription.setTag(subscription.getTag());
-//        newSubscription.setUser(subscription.getUser());
+        newSubscription.setUser(subscription.getUser());
         return subscriptionRepository.save(subscription);
     }
 }
