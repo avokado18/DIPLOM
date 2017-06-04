@@ -8,7 +8,6 @@
 </script>
 <table class="table table-striped">
     <tr>
-        <th>id</th>
         <th>Tag</th>
         <th>Email</th>
         <th>Edit</th>
@@ -16,7 +15,6 @@
 
 <#list subscriptions as subscription>
     <tr>
-        <td class="editable-td subscription-id">${subscription.id!}</td>
         <td class="editable-td subscription-tag">${subscription.tag!}</td>
         <td class="editable-td subscription-email">${subscription.email!}</td>
         <td><a class="button" href="subscriptions/edit/${subscription.id}"> Изменить </a>

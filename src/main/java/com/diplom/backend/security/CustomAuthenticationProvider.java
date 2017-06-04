@@ -1,60 +1,41 @@
 package com.diplom.backend.security;
 
-import com.dsr.myProject.dto.UserDTO;
-import com.dsr.myProject.service.UserService;
+import com.diplom.backend.user.entity.User;
+import com.diplom.backend.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Date;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-    @Autowired
-    private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String name = authentication.getName();
-        String password = authentication.getCredentials().toString();
-        UserDTO user = userService.findByName(name);
-        if ((user != null) && (password.equals(user.getPassword()) && (checkIs18yearsOld(user.getBirthdate())))) {
-            return new UsernamePasswordAuthenticationToken(
-                    name, password, new ArrayList<GrantedAuthority>());
+        String login = (String) authentication.getPrincipal();
+        String password = (String) authentication.getCredentials();
+
+        User user = userRepository.findByUsername(login);
+        if (user != null) {
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(login, password);
+            auth.setDetails(user);
+
+            return auth;
         } else {
-            return null;
+            throw new BadCredentialsException("Username/Password does not match for " + authentication.getPrincipal());
         }
     }
 
+    @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(
                 UsernamePasswordAuthenticationToken.class);
-    }
-
-    private boolean checkIs18yearsOld(long date){
-        Date now = new Date();
-        Date birthdate = new Date(date);
-        if (now.getYear() - birthdate.getYear() < 18)
-            return false;
-        else
-            if (now.getYear() - birthdate.getYear() > 18)
-                return true;
-            else {
-                if (now.getMonth() > birthdate.getMonth())
-                    return true;
-                else
-                    if (now.getMonth() < birthdate.getMonth())
-                        return false;
-                    else {
-                        if (now.getDate() >= birthdate.getDate())
-                            return true;
-                        else
-                            return false;
-                    }
-            }
     }
 }

@@ -16,6 +16,7 @@
             <label for="password">Введите email: </label>
             <input id="password" type="text" class="form-control" name="email" required="true" value="${user.password!}"/>
             <br>
+            <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
             <button type="submit" class="btn btn-primary btn-lg small" id="submit">Сохранить</button>
         </form>
         <br>
