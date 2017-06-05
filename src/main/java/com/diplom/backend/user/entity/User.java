@@ -21,23 +21,6 @@ public class User {
 
     private String password;
 
-    private Byte enabled;
-
-    @DBRef
-    private List<Subscription> subscriptions;
-
-    public User(User user) {
-        this.username = user.username;
-        this.password = user.password;
-        this.enabled = user.enabled;
-    }
-
-    public User(String username, String password, byte enabled) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-    }
-
     public User() {
     }
 
@@ -68,21 +51,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Byte getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Byte enabled) {
-        this.enabled = enabled;
-    }
-
-    public List<Subscription> getSubscriptions() {
-        return subscriptions;
-    }
-
-    public void setSubscriptions(List<Subscription> subscriptions) {
-        this.subscriptions = subscriptions;
     }
 }

@@ -43,11 +43,12 @@ public class SubscriptionService {
         subscriptionRepository.delete(subscription);
     }
 
-    public Subscription add(User user, Subscription subscription){
+    public Subscription add(Subscription subscription){
         Subscription newSubscription = new Subscription();
         newSubscription.setTag(subscription.getTag());
         newSubscription.setEmail(subscription.getEmail());
-        newSubscription.setUser(user);
+        newSubscription.setUser(subscription.getUser());
+//        newSubscription.setUser(user);
         return subscriptionRepository.save(newSubscription);
     }
 

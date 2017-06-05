@@ -1,11 +1,6 @@
 <#include "/parts/header.ftl">
-<h2>Hi, USER, this is the list of your subscriptions</h2>
+<h2>Hi, ${user.username}, this is the list of your subscriptions</h2>
 
-<script>
-    function idWithoutSpaces(id) {
-        id.replace(' ', '');
-    }
-</script>
 <table class="table table-striped">
     <tr>
         <th>Tag</th>

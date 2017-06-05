@@ -1,5 +1,6 @@
 package com.diplom.backend.subscription.controller;
 
+import com.diplom.backend.security.UserManager;
 import com.diplom.backend.subscription.entity.Subscription;
 import com.diplom.backend.subscription.service.SubscriptionService;
 import com.diplom.backend.user.entity.User;
@@ -26,6 +27,9 @@ public class SubscriptionController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserManager userManager;
+
     @RequestMapping("/list")
     public List<Subscription> findAll(){
         return subscriptionService.findAll();
@@ -33,8 +37,10 @@ public class SubscriptionController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView findAllForCurrentUser(){
-        List<Subscription> subscriptions = subscriptionService.findAll();
+        User currentUser = userManager.getCurrentUser();
+        List<Subscription> subscriptions = subscriptionService.findByUserId(currentUser.getId());
         Map<String, Object> params = new HashMap();
+        params.put("user", currentUser);
         params.put("subscriptions", subscriptions);
         return new ModelAndView("subscriptions", params);
     }
@@ -44,7 +50,9 @@ public class SubscriptionController {
         if (subscription.getId() != null){
             subscriptionService.update(subscription.getId(), subscription);
         } else {
-            subscriptionService.add(userService.findByUsername("user"), subscription);
+            User currentUser = userManager.getCurrentUser();
+            subscription.setUser(currentUser);
+            subscriptionService.add(subscription);
         }
         return new ModelAndView("redirect:/subscriptions");
     }

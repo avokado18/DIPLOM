@@ -12,12 +12,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User addUser(User user){
-        if (userRepository.findByUsername(user.getUsername()) == null){
-            User newUser = new User(user.getUsername(), user.getPassword(), user.getEnabled());
-            return userRepository.save(newUser);
-        }
-        else return null;
+    public User add(User user){
+        User newUser = new User(user.getUsername(), user.getPassword());
+        return userRepository.save(newUser);
     }
 
     public User findByUsername(String username){
@@ -28,8 +25,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void deleteUser(User user){
+    public void delete(User user){
         userRepository.delete(user);
+    }
+
+    public boolean userExists(User user){
+        return userRepository.findByUsername(user.getUsername()) != null;
     }
 
 
