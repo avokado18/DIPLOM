@@ -12,9 +12,6 @@ import java.util.List;
 @Repository
 public interface SubscriptionRepository extends MongoRepository<Subscription, BigInteger> {
 
-    @Query(value = "{ 'user.id' : ?0 }")
-    List<Subscription> findByUserId(BigInteger id);
-
     Subscription findById(BigInteger id);
 
     List<Subscription> findByUser(User user);

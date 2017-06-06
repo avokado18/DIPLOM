@@ -38,7 +38,7 @@ public class SubscriptionController {
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ModelAndView findAllForCurrentUser(){
         User currentUser = userManager.getCurrentUser();
-        List<Subscription> subscriptions = subscriptionService.findByUserId(currentUser.getId());
+        List<Subscription> subscriptions = subscriptionService.findByUser(currentUser);
         Map<String, Object> params = new HashMap();
         params.put("user", currentUser);
         params.put("subscriptions", subscriptions);

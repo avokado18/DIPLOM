@@ -31,10 +31,6 @@ public class SubscriptionService {
         return subscriptionRepository.findByUser(user);
     }
 
-    public List<Subscription> findByUserId(BigInteger id){
-        return subscriptionRepository.findByUserId(id);
-    }
-
     public void delete(BigInteger id){
         subscriptionRepository.delete(id);
     }
@@ -48,7 +44,6 @@ public class SubscriptionService {
         newSubscription.setTag(subscription.getTag());
         newSubscription.setEmail(subscription.getEmail());
         newSubscription.setUser(subscription.getUser());
-//        newSubscription.setUser(user);
         return subscriptionRepository.save(newSubscription);
     }
 
