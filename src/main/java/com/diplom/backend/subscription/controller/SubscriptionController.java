@@ -30,9 +30,11 @@ public class SubscriptionController {
     @Autowired
     private UserManager userManager;
 
-    @RequestMapping("/list")
-    public List<Subscription> findAll(){
-        return subscriptionService.findAll();
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    public ModelAndView exceptionHandler(Exception e) {
+        Map<String, Object> params = new HashMap();
+        params.put("error", e.getMessage());
+        return new ModelAndView("error", params);
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -47,11 +49,11 @@ public class SubscriptionController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView add(@ModelAttribute("subscription") Subscription subscription){
+        User currentUser = userManager.getCurrentUser();
+        subscription.setUser(currentUser);
         if (subscription.getId() != null){
             subscriptionService.update(subscription.getId(), subscription);
         } else {
-            User currentUser = userManager.getCurrentUser();
-            subscription.setUser(currentUser);
             subscriptionService.add(subscription);
         }
         return new ModelAndView("redirect:/subscriptions");
